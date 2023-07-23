@@ -6,14 +6,14 @@ import { useEffect, useState } from 'react';
  * @param initialValue Initial value.
  * @returns A tuple containing the value and a setter.
  */
-export const useLocalStorage = <T>(key: string, initialValue: T): [T, (value: T) => void] => {
+export const useLocalStorage = (key: string, initialValue: string): [string, (value: string) => void] => {
   const isClient = typeof window !== 'undefined';
 
-  const [storedValue, setStoredValue] = useState<T>(() => {
+  const [storedValue, setStoredValue] = useState<string>(() => {
     if (isClient) {
       try {
         const item = window.localStorage.getItem(key);
-        return item ? (JSON.parse(item) as T) : initialValue;
+        return item ?? initialValue;
       } catch (error) {
         /* empty */
       }
@@ -21,12 +21,11 @@ export const useLocalStorage = <T>(key: string, initialValue: T): [T, (value: T)
     return initialValue;
   });
 
-  const setValue = (value: T) => {
+  const setValue = (value: string) => {
     if (isClient) {
       try {
-        const valueToStore = value instanceof Function ? value(storedValue) : value;
-        setStoredValue(valueToStore);
-        window.localStorage.setItem(key, JSON.stringify(valueToStore));
+        setStoredValue(value);
+        window.localStorage.setItem(key, value);
       } catch (error) {
         /* empty */
       }
@@ -39,8 +38,7 @@ export const useLocalStorage = <T>(key: string, initialValue: T): [T, (value: T)
     const handleStorageChange = (e: StorageEvent) => {
       if (e.key === key) {
         try {
-          const newValue = JSON.parse(e.newValue ?? '') as T;
-          setStoredValue(newValue);
+          setStoredValue(e.newValue ?? initialValue);
         } catch (error) {
           /* empty */
         }
