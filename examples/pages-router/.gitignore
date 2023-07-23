@@ -12,12 +12,12 @@
 /.next/
 /out/
 
+# production
+/build
+
 # yalc
 .yalc
 yalc.lock
-
-# production
-/build
 
 # misc
 .DS_Store

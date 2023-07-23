@@ -10,5 +10,9 @@ type ProvidersProps = {
 export const Providers: React.FC<ProvidersProps> = (props) => {
   const { children } = props;
 
-  return <ThemeProvider themes={['light', 'dark', 'custom']}>{children}</ThemeProvider>;
+  return (
+    <ThemeProvider themes={['light', 'dark', 'custom']} useLocalStorage useSystem={false}>
+      {children}
+    </ThemeProvider>
+  );
 };
