@@ -38,4 +38,4 @@ We welcome contributions and feedback! Feel free to open issues and submit pull 
 
 ## License 📄
 
-This project is licensed under the MIT License.
+This project is licensed under the [MIT License](./LICENSE.md).
