@@ -2,26 +2,19 @@ import React, { useEffect, useMemo, useReducer } from 'react';
 import { ThemeActionTypeEnum, ThemeContextData, ThemeProviderProps } from '../types/theme.types';
 import { reducer } from './reducer';
 import { useMediaQuery } from '../hooks/use-media-query';
-import { SYSTEM_MEDIA_QUERY } from '../lib/constants';
+import { DEFAULT_THEME, DEFAULT_THEMES, SYSTEM_MEDIA_QUERY } from '../lib/constants';
 
-const initialState: ThemeContextData = {
-  state: {
-    theme: '',
-    themes: [],
-  },
-  dispatch: () => {},
-};
-
-export const ThemeContext = React.createContext<ThemeContextData>(initialState);
+export const ThemeContext = React.createContext<ThemeContextData>({} as ThemeContextData);
 
 export const ThemeProvider: React.FC<ThemeProviderProps> = (props) => {
-  const { children, useSystem } = props;
-
-  const [state, dispatch] = useReducer(reducer, {
-    ...initialState.state,
-  });
+  const { children, themes = DEFAULT_THEMES, defaultTheme = DEFAULT_THEME, useSystem } = props;
 
   const systemPreference = useMediaQuery(SYSTEM_MEDIA_QUERY);
+
+  const [state, dispatch] = useReducer(reducer, {
+    themes,
+    theme: useSystem ? (systemPreference ? 'dark' : 'light') : defaultTheme,
+  });
 
   // System prioritazion handling
   useEffect(() => {
@@ -33,6 +26,19 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = (props) => {
       payload: { theme: systemTheme },
     });
   }, [systemPreference]);
+
+  // Handle theme changes and remove old theme classes
+  useEffect(() => {
+    const { theme } = state;
+
+    document.documentElement.classList.remove(...state.themes);
+
+    if (theme) {
+      document.documentElement.classList.add(theme);
+    }
+
+    document.documentElement.style.colorScheme = theme;
+  }, [state.theme]);
 
   const memoizedValue = useMemo(() => ({ state, dispatch }), [state]);
 
