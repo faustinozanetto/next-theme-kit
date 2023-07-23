@@ -1,44 +1,30 @@
 import React from 'react';
 
-type ActionMap<M extends { [index: string]: unknown }> = {
-  [Key in keyof M]: M[Key] extends undefined
-    ? {
-        type: Key;
-      }
-    : {
-        payload: M[Key];
-        type: Key;
-      };
-};
-
-export enum ThemeActionTypeEnum {
-  SET_THEME,
-}
-
-export type ThemePayload = {
-  [ThemeActionTypeEnum.SET_THEME]: {
-    theme: string;
-  };
-};
-
-export type ThemeActions = ActionMap<ThemePayload>[keyof ActionMap<ThemePayload>];
-
-export type ThemeContextState = {
-  theme: string;
-  themes: string[];
-};
-
 export type ThemeContextData = {
-  dispatch: React.Dispatch<ThemeActions>;
-  state: ThemeContextState;
+  /**
+   * Theme update function.
+   * @param theme New theme.
+   * @returns Void
+   */
+  setTheme: (theme: string) => void;
+  /** Current theme */
+  theme: string;
+  /** Available themes */
+  themes: string[];
 };
 
 export type ThemeProviderProps = {
   children?: React.ReactNode;
+  /** Optional: Default theme. Default: 'light' */
   defaultTheme?: string;
+  /** Optional: Storage key. Default: 'theme' */
   storageKey?: string;
+  /** Optional: Available themes. Default: '[light,  dark]' */
   themes?: string[];
+  /** Optional: Use color scheme. Default: 'true' */
   useColorScheme?: boolean;
+  /** Optional: Use locale storage. Default: 'false' */
   useLocalStorage?: boolean;
+  /** Optional: Use system. Default: 'true' */
   useSystem?: boolean;
 };
