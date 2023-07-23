@@ -11,6 +11,7 @@ import {
   SYSTEM_MEDIA_QUERY,
 } from '../lib/constants';
 import { useLocalStorage as useLocalStorageHook } from '../hooks/use-local-storage';
+import { ThemeContextScript } from './theme-context-script';
 
 const initialState: ThemeContextData = {
   theme: DEFAULT_THEME,
@@ -26,11 +27,12 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = (props) => {
     useColorScheme = DEFAULT_USE_COLOR_SCHEME,
     useSystem = DEFAULT_USE_SYSTEM,
     useLocalStorage = DEFAULT_USE_LOCAL_STORAGE,
+    storageKey = DEFAULT_STORAGE_KEY,
     themes = DEFAULT_THEMES,
     defaultTheme = DEFAULT_THEME,
   } = props;
 
-  const [localStorageValue, setLocalStorageValue] = useLocalStorageHook<string>(DEFAULT_STORAGE_KEY, defaultTheme);
+  const [localStorageValue, setLocalStorageValue] = useLocalStorageHook(storageKey, defaultTheme);
 
   const systemPreference = useMediaQuery(SYSTEM_MEDIA_QUERY);
 
@@ -64,5 +66,10 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = (props) => {
 
   const memoizedValue = useMemo(() => ({ themes, theme, setTheme }), [theme, setTheme]);
 
-  return <ThemeContext.Provider value={memoizedValue}>{children}</ThemeContext.Provider>;
+  return (
+    <ThemeContext.Provider value={memoizedValue}>
+      <ThemeContextScript defaultTheme={defaultTheme} themes={themes} storageKey={storageKey} />
+      {children}
+    </ThemeContext.Provider>
+  );
 };

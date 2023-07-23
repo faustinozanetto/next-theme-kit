@@ -1,5 +1,11 @@
 import React from 'react';
 
+export type ThemeContextScriptProps = {
+  defaultTheme: NonNullable<ThemeProviderProps['defaultTheme']>;
+  storageKey: NonNullable<ThemeProviderProps['storageKey']>;
+  themes: NonNullable<ThemeProviderProps['themes']>;
+};
+
 export type ThemeContextData = {
   /**
    * Theme update function.
