@@ -1,1 +1,1 @@
-export * from './test'
+export * from './context/theme-context';
