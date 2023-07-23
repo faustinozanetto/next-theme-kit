@@ -37,4 +37,5 @@ export type ThemeProviderProps = {
   children?: React.ReactNode;
   defaultTheme?: string;
   themes?: string[];
+  useSystem?: boolean;
 };
