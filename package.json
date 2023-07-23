@@ -35,7 +35,7 @@
     "lint": "eslint --ignore-path .gitignore \"src/**/*.+(ts|js|tsx)\"",
     "lint:fix": "yarn lint --fix && prettier --write .",
     "prepare": "husky install",
-    "release": "yarn build && yarn dotenv release-it --"
+    "release": "yarn build && dotenv release-it --"
   },
   "lint-staged": {
     "./src/**/*.{ts,js,jsx,tsx}": [
