@@ -39,5 +39,6 @@ export type ThemeProviderProps = {
   storageKey?: string;
   themes?: string[];
   useColorScheme?: boolean;
+  useLocalStorage?: boolean;
   useSystem?: boolean;
 };

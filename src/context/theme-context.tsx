@@ -7,10 +7,11 @@ import {
   DEFAULT_THEME,
   DEFAULT_THEMES,
   DEFAULT_USE_COLOR_SCHEME,
+  DEFAULT_USE_LOCAL_STORAGE,
   DEFAULT_USE_SYSTEM,
   SYSTEM_MEDIA_QUERY,
 } from '../lib/constants';
-import { useLocalStorage } from '../hooks/use-local-storage';
+import { useLocalStorage as useLocalStorageHook } from '../hooks/use-local-storage';
 
 export const ThemeContext = React.createContext<ThemeContextData>({} as ThemeContextData);
 
@@ -19,19 +20,24 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = (props) => {
     children,
     useColorScheme = DEFAULT_USE_COLOR_SCHEME,
     useSystem = DEFAULT_USE_SYSTEM,
+    useLocalStorage = DEFAULT_USE_LOCAL_STORAGE,
     themes = DEFAULT_THEMES,
     defaultTheme = DEFAULT_THEME,
   } = props;
 
+  const [localStorageValue, setLocalStorageValue] = useLocalStorageHook<string>(DEFAULT_STORAGE_KEY, defaultTheme);
+
   const systemPreference = useMediaQuery(SYSTEM_MEDIA_QUERY);
-  const [localStorageValue, setLocalStorageValue] = useLocalStorage<string>(DEFAULT_STORAGE_KEY, defaultTheme);
 
   const [state, dispatch] = useReducer(reducer, {
     themes,
     theme: useSystem ? (systemPreference ? 'dark' : 'light') : defaultTheme,
   });
 
+  // Load theme from local storage if enabled
   useEffect(() => {
+    if (!useLocalStorage) return;
+
     dispatch({
       type: ThemeActionTypeEnum.SET_THEME,
       payload: {
@@ -61,7 +67,7 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = (props) => {
 
     if (useColorScheme) document.documentElement.style.colorScheme = theme;
 
-    setLocalStorageValue(theme);
+    if (useLocalStorage) setLocalStorageValue(theme);
   }, [state.theme]);
 
   const memoizedValue = useMemo(() => ({ state, dispatch }), [state]);
