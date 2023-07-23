@@ -1,5 +1,6 @@
 'use client';
 
+import React from 'react';
 import { useTheme } from 'next-theme-kit';
 
 export default function Home() {
