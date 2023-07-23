@@ -35,7 +35,7 @@
     "lint": "eslint --ignore-path .gitignore \"src/**/*.+(ts|js|tsx)\"",
     "lint:fix": "yarn lint --fix && prettier --write .",
     "prepare": "husky install",
-    "release": "yarn build && yarn release-it"
+    "release": "yarn build && yarn dotenv release-it --"
   },
   "lint-staged": {
     "./src/**/*.{ts,js,jsx,tsx}": [
@@ -48,8 +48,7 @@
       "commitMessage": "chore(release): v${version}"
     },
     "github": {
-      "release": true,
-      "autoGenerate": true
+      "release": true
     },
     "npm": {
       "publish": false
@@ -67,6 +66,7 @@
     "@types/react-dom": "18.2.6",
     "@typescript-eslint/eslint-plugin": "^6.1.0",
     "@typescript-eslint/parser": "^6.1.0",
+    "dotenv-cli": "7.2.1",
     "eslint": "8.44.0",
     "eslint-config-airbnb": "19.0.4",
     "eslint-config-prettier": "8.8.0",
