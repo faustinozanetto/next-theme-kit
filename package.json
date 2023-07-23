@@ -1,11 +1,18 @@
 {
   "name": "next-theme-kit",
   "version": "0.0.1-0",
-  "description": "Easily integrate themes in your NextJS project.",
+  "description": "Your ultimate companion for seamless dark and light theme handling in Next.js! 🎨 Simplify theme management with this powerful wrapper 🧪.",
   "author": {
     "name": "Faustino Zanetto",
     "email": "zanettofaustino@gmail.com"
   },
+  "keywords": [
+    "next.js",
+    "nextjs",
+    "theme",
+    "themes",
+    "styling"
+  ],
   "license": "MIT",
   "repository": {
     "type": "git",
