@@ -38,7 +38,7 @@
     "release": "yarn build && yarn release-it"
   },
   "lint-staged": {
-    "./{src}/**/*.{ts,js,jsx,tsx}": [
+    "./src/**/*.{ts,js,jsx,tsx}": [
       "eslint --ignore-path .gitignore --fix"
     ],
     "*": "prettier --write"

@@ -8,3 +8,5 @@ yarn.lock
 .husky
 .gitignore
 .editorconfig
+public
+*.ico
