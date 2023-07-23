@@ -10,7 +10,19 @@
 - 💾 LocalStorage Support: Remember user's theme preference across sessions.
 - ⚡️ SSR and SSG Compatibility: Works seamlessly with server-side rendering (SSR) and static site generation (SSG).
 
-## Installation 📦
+## 🚀 Live Preview
+
+You can check out the Live Preview of Next Theme Kit to see it in action!
+
+### Pages Router
+
+You can check out the [Live Preview](https://next-theme-kit-pages-router.vercel.app) with Pages Router of Next Theme Kit to see it in action!
+
+### App Router
+
+You can also explore the [Live Preview](https://next-theme-kit-app-router.vercel.app) with App Router of Next Theme Kit to see it in action!
+
+## 📦 Installation
 
 To install next-theme-kit, simply use npm:
 
@@ -24,7 +36,7 @@ Or with yarn:
 yarn add next-theme-kit
 ```
 
-## Usage 🧪
+## 🧪 Usage
 
 ### With App Router
 
@@ -87,7 +99,7 @@ export default function App({ Component, pageProps }: AppProps) {
 }
 ```
 
-### Theme Hook
+### 🪝 Theme Hook
 
 The following code shows an example of using the `useTheme` hook in a NextJs application:
 
@@ -115,14 +127,14 @@ export default function ThemeToggler() {
 }
 ```
 
-## Examples 🎆
+## 🎆 Examples
 
 Check out the [examples](./examples/) directory to see how you can implement next-theme-kit in your Next.js projects!
 
-## Contributing 🤝
+## 🤝 Contributing
 
 We welcome contributions and feedback! Feel free to open issues and submit pull requests.
 
-## License 📄
+## 📄 License
 
 This project is licensed under the [MIT License](./LICENSE.md).
