@@ -1,12 +1,14 @@
-# Next Theme Kit 🌓
+# 🎨 Next Theme Kit - Theme Management for Next.js
 
 [next-theme-kit](https://www.npmjs.com/package/next-theme-kit) is a powerful and easy-to-use wrapper for handling dark and light themes in your Next.js applications. Elevate your user experience with stunning themes and effortless style!
 
 ## Features 🎨
 
-- 🌙 Switch seamlessly between dark mode and light mode.
-- 🚀 Simplify theme management with a powerful wrapper.
-- 🎉 Enhance your Next.js app with beautiful and personalized designs.
+- 🌗 Dark and Light Themes: Switch between dark and light themes effortlessly.
+- 🎨 Custom Themes: Define your own custom themes.
+- 🌈 System Color Scheme Priority: Prioritize system color scheme for automatic theme switching.
+- 💾 LocalStorage Support: Remember user's theme preference across sessions.
+- ⚡️ SSR and SSG Compatibility: Works seamlessly with server-side rendering (SSR) and static site generation (SSG).
 
 ## Installation 📦
 
