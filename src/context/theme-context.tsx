@@ -13,7 +13,15 @@ import {
 } from '../lib/constants';
 import { useLocalStorage as useLocalStorageHook } from '../hooks/use-local-storage';
 
-export const ThemeContext = React.createContext<ThemeContextData>({} as ThemeContextData);
+const initialState: ThemeContextData = {
+  state: {
+    theme: DEFAULT_THEME,
+    themes: DEFAULT_THEMES,
+  },
+  dispatch: () => {},
+};
+
+export const ThemeContext = React.createContext<ThemeContextData>(initialState);
 
 export const ThemeProvider: React.FC<ThemeProviderProps> = (props) => {
   const {

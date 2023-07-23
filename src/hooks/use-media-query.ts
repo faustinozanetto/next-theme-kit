@@ -1,23 +1,26 @@
 import { useEffect, useState } from 'react';
 
 export const useMediaQuery = (query: string) => {
+  const isClient = typeof window !== 'undefined';
   const [matches, setMatches] = useState<boolean>(false);
 
   useEffect(() => {
-    const mediaQuery = window.matchMedia(query);
+    if (!isClient) return;
 
-    const handleMediaChange = (event: MediaQueryListEvent) => {
-      setMatches(event.matches);
-    };
+    const mediaQueryList = window.matchMedia(query);
+    const updateMatches = (e: MediaQueryListEvent) => setMatches(e.matches);
 
-    mediaQuery.addEventListener('change', handleMediaChange);
-    setMatches(mediaQuery.matches);
+    // Set the initial value
+    setMatches(mediaQueryList.matches);
 
-    // Clean up the event listener on unmount
+    mediaQueryList.addEventListener('change', updateMatches);
+
+    // eslint-disable-next-line consistent-return
     return () => {
-      mediaQuery.removeEventListener('change', handleMediaChange);
+      // Clean up the event listener when the component unmounts
+      mediaQueryList.removeEventListener('change', updateMatches);
     };
-  }, [query]);
+  }, [query, isClient]);
 
   return matches;
 };

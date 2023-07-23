@@ -8,6 +8,7 @@ import { ThemeActionTypeEnum, ThemeContextState } from '../types/theme.types';
  */
 export const useTheme = () => {
   const context = useContext(ThemeContext);
+
   if (!context) throw new Error('Tried to use ThemeContext with no context avaiable!');
 
   const { state, dispatch } = context;

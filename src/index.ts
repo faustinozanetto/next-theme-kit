@@ -1,2 +1,2 @@
-export * from './context/theme-context';
-export * from './hooks';
+export { ThemeContext, ThemeProvider } from './context/theme-context';
+export { useTheme } from './hooks';
