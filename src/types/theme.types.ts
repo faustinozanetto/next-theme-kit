@@ -36,6 +36,8 @@ export type ThemeContextData = {
 export type ThemeProviderProps = {
   children?: React.ReactNode;
   defaultTheme?: string;
+  storageKey?: string;
   themes?: string[];
+  useColorScheme?: boolean;
   useSystem?: boolean;
 };

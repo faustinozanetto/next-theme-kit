@@ -2,19 +2,43 @@ import React, { useEffect, useMemo, useReducer } from 'react';
 import { ThemeActionTypeEnum, ThemeContextData, ThemeProviderProps } from '../types/theme.types';
 import { reducer } from './reducer';
 import { useMediaQuery } from '../hooks/use-media-query';
-import { DEFAULT_THEME, DEFAULT_THEMES, SYSTEM_MEDIA_QUERY } from '../lib/constants';
+import {
+  DEFAULT_STORAGE_KEY,
+  DEFAULT_THEME,
+  DEFAULT_THEMES,
+  DEFAULT_USE_COLOR_SCHEME,
+  DEFAULT_USE_SYSTEM,
+  SYSTEM_MEDIA_QUERY,
+} from '../lib/constants';
+import { useLocalStorage } from '../hooks/use-local-storage';
 
 export const ThemeContext = React.createContext<ThemeContextData>({} as ThemeContextData);
 
 export const ThemeProvider: React.FC<ThemeProviderProps> = (props) => {
-  const { children, themes = DEFAULT_THEMES, defaultTheme = DEFAULT_THEME, useSystem } = props;
+  const {
+    children,
+    useColorScheme = DEFAULT_USE_COLOR_SCHEME,
+    useSystem = DEFAULT_USE_SYSTEM,
+    themes = DEFAULT_THEMES,
+    defaultTheme = DEFAULT_THEME,
+  } = props;
 
   const systemPreference = useMediaQuery(SYSTEM_MEDIA_QUERY);
+  const [localStorageValue, setLocalStorageValue] = useLocalStorage<string>(DEFAULT_STORAGE_KEY, defaultTheme);
 
   const [state, dispatch] = useReducer(reducer, {
     themes,
     theme: useSystem ? (systemPreference ? 'dark' : 'light') : defaultTheme,
   });
+
+  useEffect(() => {
+    dispatch({
+      type: ThemeActionTypeEnum.SET_THEME,
+      payload: {
+        theme: localStorageValue,
+      },
+    });
+  }, []);
 
   // System prioritazion handling
   useEffect(() => {
@@ -27,17 +51,17 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = (props) => {
     });
   }, [systemPreference]);
 
-  // Handle theme changes and remove old theme classes
+  // Handle theme changed
   useEffect(() => {
     const { theme } = state;
 
+    // Remove the themes from the class list and add the new theme
     document.documentElement.classList.remove(...state.themes);
+    if (theme) document.documentElement.classList.add(theme);
 
-    if (theme) {
-      document.documentElement.classList.add(theme);
-    }
+    if (useColorScheme) document.documentElement.style.colorScheme = theme;
 
-    document.documentElement.style.colorScheme = theme;
+    setLocalStorageValue(theme);
   }, [state.theme]);
 
   const memoizedValue = useMemo(() => ({ state, dispatch }), [state]);
