@@ -107,10 +107,19 @@ The following code shows an example of using the `useTheme` hook in a NextJs app
 ```tsx
 'use client';
 
+import React, { useEffect, useState } from 'react';
+
 import { useTheme } from 'next-theme-kit';
 
 export default function ThemeToggler() {
   const { theme, setTheme } = useTheme();
+  const [isMounted, setIsMounted] = useState<boolean>(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!isMounted) return null;
 
   return (
     <div className='flex flex-col items-center justify-center'>
