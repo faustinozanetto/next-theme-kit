@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { ThemeContextData, ThemeProviderProps } from '../types/theme.types';
 import { useMediaQuery } from '../hooks/use-media-query';
 import {
@@ -36,39 +36,56 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = (props) => {
 
   const systemPreference = useMediaQuery(SYSTEM_MEDIA_QUERY);
 
-  const [theme, setTheme] = useState<string>(useSystem ? (systemPreference ? 'dark' : 'light') : defaultTheme);
+  const [themeState, setThemeState] = useState<string | undefined>(() => {
+    if (typeof window === 'undefined') return undefined;
 
-  // Load theme from local storage if enabled
-  useEffect(() => {
-    if (!useLocalStorage) return;
+    return localStorageValue || defaultTheme;
+  });
 
-    setTheme(localStorageValue);
-  }, [useLocalStorage]);
+  /**
+   * Basic function that gets the theme by the system preference.
+   * @returns System theme
+   */
+  const getSystemTheme = () => (systemPreference ? 'dark' : 'light');
+
+  /**
+   * Main function that handles the theme setting and updating.
+   */
+  const setTheme = useCallback((theme: ThemeContextData['theme']) => {
+    if (!theme) return;
+
+    const updatedTheme = useSystem ? getSystemTheme() : theme;
+
+    document.documentElement.classList.remove(...themes);
+    document.documentElement.classList.add(updatedTheme);
+
+    if (useColorScheme) document.documentElement.style.colorScheme = updatedTheme;
+
+    if (useLocalStorage) setLocalStorageValue(updatedTheme);
+
+    setThemeState(theme);
+  }, []);
 
   // System prioritazion handling
   useEffect(() => {
     if (!useSystem) return;
 
-    const systemTheme = systemPreference ? 'dark' : 'light';
-    setTheme(systemTheme);
+    const theme = getSystemTheme();
+    setTheme(theme);
   }, [systemPreference]);
 
-  // Handle theme changed
-  useEffect(() => {
-    // Remove the themes from the class list and add the new theme
-    document.documentElement.classList.remove(...themes);
-    if (theme) document.documentElement.classList.add(theme);
-
-    if (useColorScheme) document.documentElement.style.colorScheme = theme;
-
-    if (useLocalStorage) setLocalStorageValue(theme);
-  }, [theme]);
-
-  const memoizedValue = useMemo(() => ({ themes, theme, setTheme }), [theme, setTheme]);
+  const memoizedValue = useMemo(() => ({ themes, theme: themeState, setTheme }), [themeState, setTheme]);
 
   return (
     <ThemeContext.Provider value={memoizedValue}>
-      <ThemeContextScript defaultTheme={defaultTheme} themes={themes} storageKey={storageKey} />
+      <ThemeContextScript
+        defaultTheme={defaultTheme}
+        themes={themes}
+        storageKey={storageKey}
+        useSystem={useSystem}
+        useColorScheme={useColorScheme}
+        useLocalStorage={useLocalStorage}
+      />
       {children}
     </ThemeContext.Provider>
   );

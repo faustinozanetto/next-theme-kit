@@ -1,10 +1,6 @@
 import React from 'react';
 
-export type ThemeContextScriptProps = {
-  defaultTheme: NonNullable<ThemeProviderProps['defaultTheme']>;
-  storageKey: NonNullable<ThemeProviderProps['storageKey']>;
-  themes: NonNullable<ThemeProviderProps['themes']>;
-};
+export type ThemeContextScriptProps = Omit<Required<ThemeProviderProps>, 'children'>;
 
 export type ThemeContextData = {
   /**
@@ -14,7 +10,7 @@ export type ThemeContextData = {
    */
   setTheme: (theme: string) => void;
   /** Current theme */
-  theme: string;
+  theme: string | undefined;
   /** Available themes */
   themes: string[];
 };

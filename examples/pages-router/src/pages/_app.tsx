@@ -7,7 +7,7 @@ import { ThemeProvider } from 'next-theme-kit';
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <ThemeProvider themes={['light', 'dark', 'custom']} useLocalStorage useSystem={false}>
+    <ThemeProvider useLocalStorage useSystem={false}>
       <Component {...pageProps} />
     </ThemeProvider>
   );

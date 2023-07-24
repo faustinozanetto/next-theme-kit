@@ -10,7 +10,5 @@ export const useTheme = () => {
 
   if (!context) throw new Error('Tried to use ThemeContext with no context avaiable!');
 
-  const { theme, setTheme } = context;
-
-  return { theme, setTheme };
+  return context;
 };

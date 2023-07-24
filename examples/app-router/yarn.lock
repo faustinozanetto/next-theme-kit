@@ -1707,10 +1707,10 @@ natural-compare@^1.4.0:
   resolved "https://registry.yarnpkg.com/natural-compare/-/natural-compare-1.4.0.tgz#4abebfeed7541f2c27acfb29bdbbd15c8d5ba4f7"
   integrity sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==
 
-next-theme-kit@^0.1.4:
-  version "0.1.4"
-  resolved "https://registry.yarnpkg.com/next-theme-kit/-/next-theme-kit-0.1.4.tgz#39106f75b6edcf27b210e5faa536669d2c4f0cc4"
-  integrity sha512-TbFtCjDzIH2Dag5FQQfTN7XL7EchgPUUoWEkEHyZ5Ok0sJ294ESBatUpdCQaiNwiwRWrQ/lSAvmLkQ5t1CKD6g==
+next-theme-kit@^0.1.5:
+  version "0.1.5"
+  resolved "https://registry.yarnpkg.com/next-theme-kit/-/next-theme-kit-0.1.5.tgz#c25ef2cb9976e0275c2026384b5c8617d7a6ecaf"
+  integrity sha512-bl6s7oFLtNj0bx6g6q6xUywO71x8W9TOh9EcHcqbTDsoblsOlLYPAdIC0O/ub44G1CLpN/fI+l3QasWUiDpJzA==
 
 next@13.4.12:
   version "13.4.12"
