@@ -9,6 +9,7 @@
 - 🌈 System Color Scheme Priority: Prioritize system color scheme for automatic theme switching.
 - 💾 LocalStorage Support: Remember user's theme preference across sessions.
 - ⚡️ SSR and SSG Compatibility: Works seamlessly with server-side rendering (SSR) and static site generation (SSG).
+- 📷 Flash Free: No theme flashing tanks to a custom script to prevent this issue.
 
 ## 🚀 Live Preview
 
