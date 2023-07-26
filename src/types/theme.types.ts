@@ -19,6 +19,8 @@ export type ThemeProviderProps = {
   children?: React.ReactNode;
   /** Optional: Default theme. Default: 'light' */
   defaultTheme?: string;
+  /** Optional: Theme mode, class or attribute (data-theme). Default: 'class' */
+  mode?: 'class' | 'attribute';
   /** Optional: Storage key. Default: 'theme' */
   storageKey?: string;
   /** Optional: Available themes. Default: '[light,  dark]' */

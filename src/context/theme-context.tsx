@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { ThemeContextData, ThemeProviderProps } from '../types/theme.types';
 import { useMediaQuery } from '../hooks/use-media-query';
 import {
+  DEFAULT_MODE,
   DEFAULT_STORAGE_KEY,
   DEFAULT_THEME,
   DEFAULT_THEMES,
@@ -9,6 +10,7 @@ import {
   DEFAULT_USE_LOCAL_STORAGE,
   DEFAULT_USE_SYSTEM,
   SYSTEM_MEDIA_QUERY,
+  THEME_ATTRIBUTE_KEY,
 } from '../lib/constants';
 import { useLocalStorage as useLocalStorageHook } from '../hooks/use-local-storage';
 import { ThemeContextScript } from './theme-context-script';
@@ -30,6 +32,7 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = (props) => {
     storageKey = DEFAULT_STORAGE_KEY,
     themes = DEFAULT_THEMES,
     defaultTheme = DEFAULT_THEME,
+    mode = DEFAULT_MODE,
   } = props;
 
   const [localStorageValue, setLocalStorageValue] = useLocalStorageHook(storageKey, defaultTheme);
@@ -56,8 +59,12 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = (props) => {
 
     const updatedTheme = useSystem ? getSystemTheme() : theme;
 
-    document.documentElement.classList.remove(...themes);
-    document.documentElement.classList.add(updatedTheme);
+    if (mode === 'class') {
+      document.documentElement.classList.remove(...themes);
+      document.documentElement.classList.add(updatedTheme);
+    } else {
+      document.documentElement.setAttribute(THEME_ATTRIBUTE_KEY, updatedTheme);
+    }
 
     if (useColorScheme) document.documentElement.style.colorScheme = updatedTheme;
 
@@ -85,6 +92,7 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = (props) => {
         useSystem={useSystem}
         useColorScheme={useColorScheme}
         useLocalStorage={useLocalStorage}
+        mode={mode}
       />
       {children}
     </ThemeContext.Provider>

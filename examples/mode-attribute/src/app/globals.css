@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --bg-color: #fafafa;
+    --text-color: #030712;
+  }
+
+  :root[data-theme='dark'] {
+    --bg-color: #030712;
+    --text-color: #fafafa;
+  }
+
+  :root[data-theme='special'] {
+    --bg-color: #22c55e;
+    --text-color: #052e16;
+  }
+
+  body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+  }
+}

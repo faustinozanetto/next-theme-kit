@@ -7,3 +7,5 @@ export const DEFAULT_USE_SYSTEM: NonNullable<ThemeProviderProps['useSystem']> = 
 export const DEFAULT_USE_COLOR_SCHEME: NonNullable<ThemeProviderProps['useColorScheme']> = true;
 export const DEFAULT_USE_LOCAL_STORAGE: NonNullable<ThemeProviderProps['useLocalStorage']> = false;
 export const DEFAULT_STORAGE_KEY: NonNullable<ThemeProviderProps['storageKey']> = 'theme';
+export const DEFAULT_MODE: NonNullable<ThemeProviderProps['mode']> = 'class';
+export const THEME_ATTRIBUTE_KEY: string = 'data-theme';
