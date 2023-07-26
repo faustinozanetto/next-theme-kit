@@ -17,7 +17,7 @@ export default function Home() {
     <main className='flex min-h-screen flex-col items-center justify-center'>
       <h1 className='text-5xl font-extrabold'>🎨Next Theme Kit</h1>
       <h2 className='text-3xl font-medium'>Mode Attribute Example</h2>
-      <span className='text-2xl font-semibold mb-2'>v0.2.0</span>
+      <span className='text-2xl font-semibold mb-2'>v0.2.1</span>
       Theme: {theme}
       <div className='flex gap-2 mt-2'>
         <button

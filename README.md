@@ -23,6 +23,10 @@ You can check out the [Live Preview](https://next-theme-kit-pages-router.vercel.
 
 You can also explore the [Live Preview](https://next-theme-kit-app-router.vercel.app) with App Router of Next Theme Kit to see it in action!
 
+### Attribute Mode
+
+You can check out the [Live Preview](https://next-theme-kit-attribute-example.vercel.app/) with the Attribute Mode of Next Theme kit in action!.
+
 ## 📦 Installation
 
 To install next-theme-kit, simply use npm:
@@ -140,6 +144,26 @@ export default function ThemeToggler() {
 ## 🎆 Examples
 
 Check out the [examples](./examples/) directory to see how you can implement next-theme-kit in your Next.js projects!
+
+## ⏲️ API
+
+### ThemeProvider
+
+Below is the api description of both the **ThemeProvider** and the **useTheme** hook.
+
+- `defaultTheme?: string`: **Optional** - The default theme to be used if no theme is specified. Defaults to **'light'**.
+- `mode?: 'class' | 'attribute'`: **Optional** - Theme mode, can be set to 'class' or 'attribute'. If attribute is enabled, the attribute is **'data-theme'**. Defaults to **'class'**.
+- `storageKey?: string`: **Optional** - The key used for storing the theme in local storage. Defaults to **theme**.
+- `themes?: string[]`: **Optional** - An array of available themes for the application. Defaults to **['dark', 'light']**.
+- `useColorScheme?: boolean`: **Optional** - Whether to use the color scheme for the theme. Defaults to **true**.
+- `useLocalStorage?: boolean`: **Optional** - Whether to use local storage to save the theme. Defaults to **false**.
+- `useSystem?: boolean`: **Optional** - Whether to use the system's preferred color scheme. Defaults to **true**.
+
+## useTheme
+
+- `setTheme(theme: string): void`: A function that allows you to update the current theme of the application.
+- `theme: string | undefined`: Represents the current theme of the application.
+- `themes: string[]`: An array containing the available themes that can be used in the application.
 
 ## 🤝 Contributing
 
